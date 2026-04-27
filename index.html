@@ -85,7 +85,7 @@ section{padding:110px 6%;position:relative;z-index:1}
 .pcard:hover .parrow{color:var(--gold);transform:translate(3px,-3px)}
 
 /* DETAIL PANEL - opens inline after card row */
-.dp{display:none;background:var(--navy2);border:1px solid var(--border);border-top:3px solid var(--gold);margin-top:2px;grid-column:1/-1;width:100%}
+.dp{display:none;background:var(--navy2);border:1px solid var(--border);border-top:3px solid var(--gold);margin-top:0;grid-column:1/-1;width:100%}
 .dp.open{display:block;animation:slideDown 0.4s ease}
 @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 .dph{padding:52px 6% 36px;background:linear-gradient(135deg,rgba(201,168,76,0.05) 0%,transparent 50%);border-bottom:1px solid var(--border);width:100%}
@@ -190,7 +190,115 @@ footer p{font-size:12px;color:var(--white3);font-weight:300}
 footer a{color:var(--gold);text-decoration:none}
 .hr{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 6%}
 @keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:900px){.hero-inner{flex-direction:column-reverse;gap:40px}.photo-wrap,.photo-img{width:180px;height:180px}.stats-inner{flex-wrap:wrap;gap:24px}.stat{flex:none;width:45%;border-right:none;text-align:left;padding:0}.nav-links{display:none}.tools-pairs{grid-template-columns:1fr}.dpbody,.dph{padding:28px 20px}}
+
+/* ── TABLET ── */
+@media(max-width:1024px){
+  .hero-inner{gap:48px}
+  .pgrid{grid-template-columns:repeat(2,1fr)}
+  .dpmeta{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  nav{padding:0 4%}
+  .nav-links{display:none}
+
+  /* Hero */
+  .hero{padding:90px 4% 60px;min-height:auto}
+  .hero-inner{flex-direction:column;align-items:center;gap:32px;text-align:center}
+  h1{font-size:clamp(44px,12vw,72px);letter-spacing:-2px}
+  .role{font-size:16px}
+  .desc{font-size:13px;border-left:none;border-top:2px solid var(--gold);padding-left:0;padding-top:16px;text-align:left}
+  .cta{justify-content:center}
+  .btn-g,.btn-o{padding:12px 24px;font-size:12px}
+
+  /* Photo */
+  .photo-wrap{width:220px;order:-1}
+  .photo-circle{width:200px;height:200px}
+  .photo-img{width:200px;height:200px}
+  .photo-ring1{inset:-8px}
+  .photo-ring2{inset:-18px}
+  .photo-role{font-size:9px;letter-spacing:0.1em}
+  .sicon{width:34px;height:34px}
+  .sicon svg{width:16px;height:16px}
+
+  /* Stats */
+  .stats-section{padding:36px 4%}
+  .stats-inner{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .stat{border-right:none;padding:0;text-align:center}
+  .stat:first-child{text-align:center}
+  .stat:last-child{text-align:center}
+  .snum{font-size:36px}
+  .snum .unit{font-size:22px}
+  .slbl{font-size:10px}
+
+  /* Sections */
+  section{padding:60px 4%}
+  .stitle{font-size:clamp(28px,8vw,40px);letter-spacing:-1px}
+  .sdesc{font-size:13px;margin-bottom:36px}
+
+  /* Projects grid - single column on mobile */
+  .pgrid{grid-template-columns:1fr;gap:2px}
+  .pcard{padding:24px 20px}
+  .ptitle{font-size:18px}
+  .pdesc{font-size:12px}
+
+  /* Detail panels */
+  .dp{grid-column:1/-1}
+  .dph{padding:28px 4% 20px}
+  .dpbody{padding:28px 4%}
+  .dpmeta{grid-template-columns:1fr 1fr}
+  .dpmi{padding:14px 16px}
+  .dptitle{font-size:clamp(22px,6vw,32px);letter-spacing:-0.5px}
+  .dpintro{font-size:13px}
+  .dpmv{font-size:12px}
+
+  /* Steps */
+  .stcont{padding:4px 0 20px 14px}
+  .sttitle{font-size:13px}
+  .stdesc{font-size:12px}
+
+  /* Findings */
+  .findings{grid-template-columns:1fr}
+
+  /* Checklist */
+  .cl{grid-template-columns:1fr}
+  .cli{font-size:12px}
+
+  /* Tools */
+  .tools-pairs{grid-template-columns:1fr}
+  .tool-pair{grid-template-columns:1fr 1fr}
+  .tname{font-size:12px}
+  .tuse{font-size:10px}
+
+  /* Skills */
+  .sklist{grid-template-columns:1fr 1fr}
+  .skitem{font-size:12px;padding:10px 12px}
+
+  /* Contact */
+  .ctitle{font-size:clamp(32px,10vw,52px);letter-spacing:-2px}
+  .clink{font-size:13px;padding:14px 18px}
+
+  /* Article links */
+  .article-link{font-size:12px}
+
+  /* Footer */
+  footer{padding:20px 4%;flex-direction:column;gap:8px;text-align:center}
+}
+
+/* ── SMALL MOBILE ── */
+@media(max-width:400px){
+  h1{font-size:38px}
+  .photo-circle{width:170px;height:170px}
+  .photo-img{width:170px;height:170px}
+  .photo-wrap{width:190px}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .snum{font-size:30px}
+  .tool-pair{grid-template-columns:1fr}
+  .sklist{grid-template-columns:1fr}
+  .dpmeta{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -739,30 +847,31 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// Project Detail - opens as full-width row after clicked card's row
+// Project Detail - opens inline below clicked card, full width
 function openDP(id, btn){
-  const allPanels = document.querySelectorAll('.dp');
   const panel = document.getElementById('dp-'+id);
   const isOpen = panel.classList.contains('open');
 
-  // Remove active state from all cards
-  document.querySelectorAll('.pcard').forEach(c => c.classList.remove('active-card'));
-
-  // Close all panels and move them to end of grid
-  allPanels.forEach(p => {
+  // Close all panels first
+  document.querySelectorAll('.dp').forEach(p => {
     p.classList.remove('open');
     p.style.display = 'none';
   });
+  document.querySelectorAll('.pcard').forEach(c => c.classList.remove('active-card'));
 
   if(!isOpen){
+    // Mark card as active
     btn.classList.add('active-card');
-    // Place panel after the clicked card in DOM
-    btn.insertAdjacentElement('afterend', panel);
+    // Move panel immediately after this card in DOM
+    btn.after(panel);
+    // Show panel
     panel.style.display = 'block';
-    panel.classList.add('open');
-    // Make panel span full width
     panel.style.gridColumn = '1 / -1';
-    setTimeout(()=>panel.scrollIntoView({behavior:'smooth', block:'start'}), 120);
+    panel.classList.add('open');
+    // Smooth scroll to panel
+    setTimeout(() => {
+      panel.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }, 100);
   }
 }
 
