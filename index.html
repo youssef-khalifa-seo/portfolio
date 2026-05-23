@@ -32,7 +32,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:68px;dis
 .photo-ring1{position:absolute;inset:-10px;border-radius:50%;border:1px solid var(--gold-bdr);animation:ringPulse 3s ease-in-out infinite;pointer-events:none}
 .photo-ring2{position:absolute;inset:-24px;border-radius:50%;border:1px dashed rgba(201,168,76,0.12);animation:ringPulse 3s 1.5s ease-in-out infinite;pointer-events:none}
 .photo-img{width:320px;height:320px;border-radius:50%;object-fit:cover;object-position:center 15%;border:3px solid var(--gold);mix-blend-mode:luminosity;filter:brightness(1.1) contrast(1.05);background:var(--navy2);display:block;box-shadow:0 0 0 6px rgba(201,168,76,0.12)}
-@keyframes ringPulse{0%,100%{transform:scale(1);opacity:0.4}50%{transform:scale(1.05);opacity:0.9}}50%{transform:scale(1.05);opacity:0.9}}
 @keyframes ringPulse{0%,100%{transform:scale(1);opacity:0.4}50%{transform:scale(1.05);opacity:0.9}}
 
 
@@ -81,8 +80,17 @@ section{padding:110px 6%;position:relative;z-index:1}
 .pdesc{font-size:13px;color:var(--white2);line-height:1.7;margin-bottom:20px;font-weight:300}
 .ptags{display:flex;flex-wrap:wrap;gap:6px}
 .ptag{font-size:11px;font-weight:500;padding:3px 10px;border-radius:2px;background:rgba(126,184,212,0.08);color:var(--sky);border:1px solid rgba(126,184,212,0.2);letter-spacing:0.04em}
-.parrow{position:absolute;top:32px;right:32px;font-size:20px;color:var(--white3);transition:all 0.3s}
-.pcard:hover .parrow{color:var(--gold);transform:translate(3px,-3px)}
+.parrow{display:none}
+.pcard-actions{display:flex;gap:8px;margin-top:20px;align-items:flex-end}
+.pcard-sheet{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--navy);padding:8px 14px;border-radius:4px;font-weight:700;font-size:11px;text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;transition:all 0.22s;flex-shrink:0;border:none;cursor:pointer}
+.pcard-sheet:hover{background:#d9b85a;transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,0.35)}
+.pcard-sheet svg{width:14px;height:14px;fill:var(--navy);flex-shrink:0}
+.pcard-details{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--white2);padding:8px 14px;border-radius:4px;font-weight:500;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;border:1px solid var(--border);transition:all 0.22s;cursor:pointer;flex-shrink:0}
+.pcard-details:hover{border-color:var(--sky);color:var(--sky)}
+.pcard-details svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
+.pcard-sheets{display:flex;gap:6px;flex-wrap:wrap}
+.pcard-sheet-wrap{display:flex;flex-direction:column;gap:3px}
+.pcard-sheet-label{font-size:9px;color:var(--white3);text-transform:uppercase;letter-spacing:0.08em;padding-left:2px}
 
 /* DETAIL PANEL - opens inline after card row */
 .dp{display:none;background:var(--navy2);border:1px solid var(--border);border-top:3px solid var(--gold);margin-top:0;grid-column:1/-1;width:100%}
@@ -145,6 +153,11 @@ section{padding:110px 6%;position:relative;z-index:1}
 .insight{background:var(--gold-dim);border:1px solid var(--gold-bdr);border-left:3px solid var(--gold);border-radius:4px;padding:20px 24px;margin-top:16px}
 .insight strong{display:block;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px}
 .insight p{font-size:13px;color:var(--white2);line-height:1.7;font-weight:300}
+
+/* SHEET ICON BUTTON */
+.sheet-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);padding:10px 22px;border-radius:4px;font-weight:700;font-size:12px;text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.25s;margin-top:14px}
+.sheet-btn:hover{background:#d9b85a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.3)}
+.sheet-btn svg{width:16px;height:16px;fill:var(--navy);flex-shrink:0}
 
 /* EMBED */
 .eph{background:var(--navy);border:1px dashed var(--gold-bdr);border-radius:6px;padding:28px;text-align:center;margin-top:16px}
@@ -381,50 +394,126 @@ footer a{color:var(--gold);text-decoration:none}
   <p class="sdesc reveal d2">A collection of independent SEO analyses — each focusing on one or more aspects of search optimization, applied to real websites across multiple industries and markets.</p>
 
   <div class="pgrid">
-    <button class="pcard reveal d1" onclick="openDP('kw',this)">
-      <div class="parrow">↗</div>
+    <div class="pcard reveal d1">
       <div class="pnum">01</div>
       <div class="picon">🔍</div>
       <div class="ptitle">Keyword Research &amp; Strategy</div>
       <div class="pdesc">Structured keyword maps across 8+ websites — segmented by market segment, search intent, and difficulty with competitor gap analysis.</div>
       <div class="ptags"><span class="ptag">SEMrush</span><span class="ptag">Google Keyword Planner</span><span class="ptag">Answer The Public</span><span class="ptag">Ahrefs Extension</span></div>
-    </button>
+      <div class="pcard-actions">
+        <div class="pcard-sheets">
+          <div class="pcard-sheet-wrap">
+            <span class="pcard-sheet-label">UAE Formation</span>
+            <a href="https://docs.google.com/spreadsheets/d/1HcllICVePnUfuNc3zdOPFfB75hVAp85vQ454ZCPPzOk/edit?usp=sharing" target="_blank" class="pcard-sheet" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+              Sheet
+            </a>
+          </div>
+          <div class="pcard-sheet-wrap">
+            <span class="pcard-sheet-label">Perfume Store</span>
+            <a href="https://docs.google.com/spreadsheets/d/161dyvzoWik4uy7p8_4rXop6P0cDZ_s4pPiw99JvIl6o/edit?usp=sharing" target="_blank" class="pcard-sheet" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+              Sheet
+            </a>
+          </div>
+        </div>
+        <button class="pcard-details" onclick="openDP('kw',this.closest('.pcard'))">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          Details
+        </button>
+      </div>
+    </div>
 
-    <button class="pcard reveal d2" onclick="openDP('tech',this)">
-      <div class="parrow">↗</div>
+    <div class="pcard reveal d2">
       <div class="pnum">02</div>
       <div class="picon">⚙️</div>
       <div class="ptitle">Technical SEO Audit</div>
       <div class="pdesc">Full technical audits for 3 digital marketing websites in Saudi Arabia — covering 10+ technical checkpoints across crawlability, speed, indexing, and more.</div>
       <div class="ptags"><span class="ptag">Screaming Frog</span><span class="ptag">GTmetrix</span><span class="ptag">Siteliner</span><span class="ptag">Copyscape</span></div>
-    </button>
+      <div class="pcard-actions">
+        <div class="pcard-sheets">
+          <div class="pcard-sheet-wrap">
+            <span class="pcard-sheet-label">KMT</span>
+            <a href="https://docs.google.com/spreadsheets/d/1Iuq4IIE4UffVPMN6WJ6KQ--4zRLTM7IwjpnmPmS5jvA/edit?usp=sharing" target="_blank" class="pcard-sheet" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+              Sheet
+            </a>
+          </div>
+          <div class="pcard-sheet-wrap">
+            <span class="pcard-sheet-label">Adselams</span>
+            <a href="https://docs.google.com/spreadsheets/d/1z_rMcctGswP-IQlk-9E8bxR9pLJ97jIInI0OvkeFTJ8/edit?usp=sharing" target="_blank" class="pcard-sheet" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+              Sheet
+            </a>
+          </div>
+          <div class="pcard-sheet-wrap">
+            <span class="pcard-sheet-label">Siraj</span>
+            <a href="https://docs.google.com/spreadsheets/d/1KgMYaWA6w9y3iGpWfrAxY-mjmMaC7w50Ut102nr85ak/edit?usp=sharing" target="_blank" class="pcard-sheet" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+              Sheet
+            </a>
+          </div>
+        </div>
+        <button class="pcard-details" onclick="openDP('tech',this.closest('.pcard'))">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          Details
+        </button>
+      </div>
+    </div>
 
-    <button class="pcard reveal d3" onclick="openDP('onpage',this)">
-      <div class="parrow">↗</div>
+    <div class="pcard reveal d3">
       <div class="pnum">03</div>
       <div class="picon">📄</div>
       <div class="ptitle">On-Page &amp; Content Analysis</div>
       <div class="pdesc">16-element manual on-page audit across 30+ pages for 4 websites — reviewing every on-page factor from meta tags and headers to images and schema.</div>
       <div class="ptags"><span class="ptag">Screaming Frog</span><span class="ptag">Rank Math</span><span class="ptag">WordPress</span><span class="ptag">Manual Review</span></div>
-    </button>
+      <div class="pcard-actions">
+        <a href="https://docs.google.com/spreadsheets/d/118NT43-EgTMY9KI25oj9bfnpTfj0wjyalzhVXkFO_KA/edit?usp=sharing" target="_blank" class="pcard-sheet" onclick="event.stopPropagation()">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+          View Sheet
+        </a>
+        <button class="pcard-details" onclick="openDP('onpage',this.closest('.pcard'))">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          Details
+        </button>
+      </div>
+    </div>
 
-    <button class="pcard reveal d4" onclick="openDP('links',this)">
-      <div class="parrow">↗</div>
+    <div class="pcard reveal d4">
       <div class="pnum">04</div>
       <div class="picon">🔗</div>
       <div class="ptitle">Internal Link Structure Audit</div>
       <div class="pdesc">Internal link audits with competitor benchmarking — plus SEO-optimized article writing and topic-cluster implementation on a live training website.</div>
       <div class="ptags"><span class="ptag">Screaming Frog</span><span class="ptag">Topic Clusters</span><span class="ptag">Live Articles</span></div>
-    </button>
+      <div class="pcard-actions">
+        <a href="https://docs.google.com/spreadsheets/d/12sq1h3vvSnP31UF_SdP1z3U70zUBXNUwR1MwtshLq1c/edit?usp=sharing" target="_blank" class="pcard-sheet" onclick="event.stopPropagation()">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+          View Sheet
+        </a>
+        <button class="pcard-details" onclick="openDP('links',this.closest('.pcard'))">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          Details
+        </button>
+      </div>
+    </div>
 
-    <button class="pcard reveal d5" onclick="openDP('local',this)">
-      <div class="parrow">↗</div>
+    <div class="pcard reveal d5">
       <div class="pnum">05</div>
       <div class="picon">📍</div>
       <div class="ptitle">Local SEO &amp; Geo-Targeting</div>
-      <div class="pdesc">City-level keyword strategies for UAE and Saudi Arabia markets — targeting 5 Emirates and multiple Saudi cities with intent-based segmentation.</div>
-      <div class="ptags"><span class="ptag">UAE Market</span><span class="ptag">Saudi Arabia</span><span class="ptag">City Targeting</span></div>
-    </button>
+      <div class="pdesc">City-level keyword strategy for the UAE market — targeting 5 Emirates with location-specific intent segmentation.</div>
+      <div class="ptags"><span class="ptag">UAE Market</span><span class="ptag">5 Emirates</span><span class="ptag">City Targeting</span></div>
+      <div class="pcard-actions">
+        <a href="https://docs.google.com/spreadsheets/d/1HcllICVePnUfuNc3zdOPFfB75hVAp85vQ454ZCPPzOk/edit?usp=sharing" target="_blank" class="pcard-sheet" onclick="event.stopPropagation()">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+          View Sheet
+        </a>
+        <button class="pcard-details" onclick="openDP('local',this.closest('.pcard'))">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          Details
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- DETAIL: KEYWORD RESEARCH -->
@@ -484,7 +573,10 @@ footer a{color:var(--gold);text-decoration:none}
         </div>
         <div class="eph">
           <p>UAE Company Formation — Full Keyword Map</p>
-          <a href="https://docs.google.com/spreadsheets/d/1HcllICVePnUfuNc3zdOPFfB75hVAp85vQ454ZCPPzOk/edit?usp=sharing" target="_blank">View Google Sheet →</a>
+          <a href="https://docs.google.com/spreadsheets/d/1HcllICVePnUfuNc3zdOPFfB75hVAp85vQ454ZCPPzOk/edit?usp=sharing" target="_blank" class="sheet-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+            View Google Sheet
+          </a>
         </div>
       </div>
 
@@ -497,7 +589,10 @@ footer a{color:var(--gold);text-decoration:none}
         </div>
         <div class="eph">
           <p>Perfume Store — Full Keyword Map</p>
-          <a href="https://docs.google.com/spreadsheets/d/161dyvzoWik4uy7p8_4rXop6P0cDZ_s4pPiw99JvIl6o/edit?usp=sharing" target="_blank">View Google Sheet →</a>
+          <a href="https://docs.google.com/spreadsheets/d/161dyvzoWik4uy7p8_4rXop6P0cDZ_s4pPiw99JvIl6o/edit?usp=sharing" target="_blank" class="sheet-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+            View Google Sheet
+          </a>
         </div>
       </div>
     </div>
@@ -572,9 +667,9 @@ footer a{color:var(--gold);text-decoration:none}
       <div class="dpsec">
         <div class="dpst">Audit Reports</div>
         <div style="display:grid;gap:10px;">
-          <div class="eph"><p>KMT Digital Marketing — Technical Audit Report</p><a href="https://docs.google.com/spreadsheets/d/1Iuq4IIE4UffVPMN6WJ6KQ--4zRLTM7IwjpnmPmS5jvA/edit?usp=sharing" target="_blank">View Google Sheet →</a></div>
-          <div class="eph"><p>Adselams — Technical Audit Report</p><a href="https://docs.google.com/spreadsheets/d/1z_rMcctGswP-IQlk-9E8bxR9pLJ97jIInI0OvkeFTJ8/edit?usp=sharing" target="_blank">View Google Sheet →</a></div>
-          <div class="eph"><p>Siraj — Technical Audit Report</p><a href="https://docs.google.com/spreadsheets/d/1KgMYaWA6w9y3iGpWfrAxY-mjmMaC7w50Ut102nr85ak/edit?usp=sharing" target="_blank">View Google Sheet →</a></div>
+          <div class="eph"><p>KMT Digital Marketing — Technical Audit Report</p><a href="https://docs.google.com/spreadsheets/d/1Iuq4IIE4UffVPMN6WJ6KQ--4zRLTM7IwjpnmPmS5jvA/edit?usp=sharing" target="_blank" class="sheet-btn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>View Google Sheet</a></div>
+          <div class="eph"><p>Adselams — Technical Audit Report</p><a href="https://docs.google.com/spreadsheets/d/1z_rMcctGswP-IQlk-9E8bxR9pLJ97jIInI0OvkeFTJ8/edit?usp=sharing" target="_blank" class="sheet-btn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>View Google Sheet</a></div>
+          <div class="eph"><p>Siraj — Technical Audit Report</p><a href="https://docs.google.com/spreadsheets/d/1KgMYaWA6w9y3iGpWfrAxY-mjmMaC7w50Ut102nr85ak/edit?usp=sharing" target="_blank" class="sheet-btn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>View Google Sheet</a></div>
         </div>
       </div>
     </div>
@@ -619,7 +714,10 @@ footer a{color:var(--gold);text-decoration:none}
         <p style="font-size:13px;color:var(--white2);margin-bottom:16px;font-weight:300;">A travel agency website actively targeting international tourists — primarily from the United States — planning trips to Egypt. The audit covered all blog articles and service pages, reviewing each against the full on-page checklist.</p>
         <div class="eph">
           <p>Amoun Ra Tours — On-Page Audit Sheet</p>
-          <a href="https://docs.google.com/spreadsheets/d/118NT43-EgTMY9KI25oj9bfnpTfj0wjyalzhVXkFO_KA/edit?usp=sharing" target="_blank">View Google Sheet →</a>
+          <a href="https://docs.google.com/spreadsheets/d/118NT43-EgTMY9KI25oj9bfnpTfj0wjyalzhVXkFO_KA/edit?usp=sharing" target="_blank" class="sheet-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+            View Google Sheet
+          </a>
         </div>
       </div>
         <p style="font-size:13px;color:var(--white2);margin-bottom:16px;font-weight:300;">On-page audits were also conducted for websites in company formation (UAE), e-commerce perfumes (Saudi Arabia), and feasibility study services (Egypt) — each delivered as a structured audit sheet with prioritized action items per page.</p>
@@ -675,13 +773,16 @@ footer a{color:var(--gold);text-decoration:none}
         </div>
         <div class="eph" style="margin-top:24px;">
           <p>Feasibility Study Website — Internal Link Audit Sheet</p>
-          <a href="https://docs.google.com/spreadsheets/d/12sq1h3vvSnP31UF_SdP1z3U70zUBXNUwR1MwtshLq1c/edit?usp=sharing" target="_blank">View Google Sheet →</a>
+          <a href="https://docs.google.com/spreadsheets/d/12sq1h3vvSnP31UF_SdP1z3U70zUBXNUwR1MwtshLq1c/edit?usp=sharing" target="_blank" class="sheet-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+            View Google Sheet
+          </a>
         </div>
       </div>
 
       <div class="dpsec">
         <div class="dpst">Live Implementation — SEO-Optimized Articles</div>
-        <p style="font-size:13px;color:var(--white2);margin-bottom:16px;font-weight:300;">To put the internal linking strategy into practice, I wrote and published 5 SEO-optimized articles on a live training website in the feasibility studies niche. The article content was AI-assisted as I am not a content writer — however, all on-page SEO elements were fully applied including meta titles, header structure, keyword placement, image optimization, schema markup, and a structured topic-cluster internal linking model connecting all 5 articles.</p>
+        <p style="font-size:13px;color:var(--white2);margin-bottom:16px;font-weight:300;">To put the internal linking strategy into practice, I wrote and published 5 SEO-optimized articles on a live training website in the feasibility studies niche. All on-page SEO elements were fully implemented — including meta titles, header structure, keyword placement, image optimization, schema markup, and a structured topic-cluster internal linking model connecting all 5 articles.</p>
         <div class="cl" style="margin-bottom:20px;">
           <div class="cli">Optimized Meta Titles &amp; Descriptions</div>
           <div class="cli">Header Tag Structure (H1–H3)</div>
@@ -708,17 +809,17 @@ footer a{color:var(--gold);text-decoration:none}
     <div class="dph">
       <button class="dpclose" onclick="closeDP('local')">← Close</button>
       <div class="dptitle">📍 Local SEO &amp; Geo-Targeting</div>
-      <div class="dpintro">City-level keyword strategies for UAE and Saudi Arabia markets — aligning content with location-specific search intent to reduce competition and target high-converting local searches.</div>
+      <div class="dpintro">City-level keyword strategy for the UAE market — aligning content with location-specific search intent to reduce competition and target high-converting local searches.</div>
     </div>
     <div class="dpmeta">
-      <div class="dpmi"><div class="dpml">Projects</div><div class="dpmv">2 Geo-Targeted Projects</div></div>
+      <div class="dpmi"><div class="dpml">Project</div><div class="dpmv">UAE Company Formation</div></div>
       <div class="dpmi"><div class="dpml">UAE Coverage</div><div class="dpmv">5 Emirates</div></div>
-      <div class="dpmi"><div class="dpml">Saudi Coverage</div><div class="dpmv">Multiple Cities</div></div>
+      <div class="dpmi"><div class="dpml">Target Audience</div><div class="dpmv">Egyptians in UAE</div></div>
       <div class="dpmi"><div class="dpml">Tools</div><div class="dpmv">SEMrush · Google Keyword Planner · Keyword Tool</div></div>
     </div>
     <div class="dpbody">
       <div class="dpsec">
-        <div class="dpst">Project 1 — UAE Company Formation</div>
+        <div class="dpst">UAE Company Formation — Geo-Targeted Strategy</div>
         <p style="font-size:13px;color:var(--white2);margin-bottom:16px;font-weight:300;">Targeting Egyptians in UAE wanting to start a business — each Emirate has different regulations, free zones, and search behavior, making city-level segmentation essential for relevance and ranking.</p>
         <div class="cl">
           <div class="cli">Dubai — Highest Volume</div>
@@ -733,11 +834,12 @@ footer a{color:var(--gold);text-decoration:none}
         </div>
         <div class="eph">
           <p>UAE Geo-Targeted Keyword Map</p>
-          <a href="https://docs.google.com/spreadsheets/d/1HcllICVePnUfuNc3zdOPFfB75hVAp85vQ454ZCPPzOk/edit?usp=sharing" target="_blank">View Google Sheet →</a>
+          <a href="https://docs.google.com/spreadsheets/d/1HcllICVePnUfuNc3zdOPFfB75hVAp85vQ454ZCPPzOk/edit?usp=sharing" target="_blank" class="sheet-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.9 3H14V1h-4v2H4.1C3 3 2 4 2 5.1V21c0 1.1 1 2 2.1 2h15.8c1.1 0 2.1-.9 2.1-2V5.1C22 4 21 3 19.9 3zM7 17H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V7h2v2zm7 8H8v-2h6v2zm0-4H8v-2h6v2zm0-4H8V7h6v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+            View Google Sheet
+          </a>
         </div>
       </div>
-
-      
     </div>
   </div>
 </section>
@@ -814,7 +916,7 @@ footer a{color:var(--gold);text-decoration:none}
 </section>
 
 <footer>
-  <p>© 2025 Youssef Khalifa — Junior SEO Specialist</p>
+  <p>© 2026 Youssef Khalifa — Junior SEO Specialist</p>
   <p>Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
 </footer>
 
@@ -841,7 +943,7 @@ const obs=new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 // Project Detail - opens inline below clicked card, full width
-function openDP(id, btn){
+function openDP(id, card){
   const panel = document.getElementById('dp-'+id);
   const isOpen = panel.classList.contains('open');
 
@@ -853,15 +955,11 @@ function openDP(id, btn){
   document.querySelectorAll('.pcard').forEach(c => c.classList.remove('active-card'));
 
   if(!isOpen){
-    // Mark card as active
-    btn.classList.add('active-card');
-    // Move panel immediately after this card in DOM
-    btn.after(panel);
-    // Show panel
+    card.classList.add('active-card');
+    card.after(panel);
     panel.style.display = 'block';
     panel.style.gridColumn = '1 / -1';
     panel.classList.add('open');
-    // Smooth scroll to panel
     setTimeout(() => {
       panel.scrollIntoView({behavior: 'smooth', block: 'start'});
     }, 100);
