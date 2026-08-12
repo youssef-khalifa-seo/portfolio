@@ -320,13 +320,13 @@ footer a{color:var(--gold);text-decoration:none}
 
 </style>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8L3SS2PNW"></script>
+<!-- ⚠️ استبدل G-XXXXXXXXXX برقم قياس GA4 الحقيقي بتاعك (Measurement ID) قبل الرفع -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-Y8L3SS2PNW');
+  gtag('config', 'G-XXXXXXXXXX');
 </script>
 </head>
 <body>
@@ -1663,9 +1663,11 @@ document.addEventListener('click', function(e){
     safeGtag('event', 'sheet_click', {event_category: 'sheet_link', event_label: label, source: 'card'});
     return;
   }
-  // 6) روابط المقالات (Article mini)
+  // 6) روابط المقالات (Article mini) — حدث مستقل article_click
   if (el.matches('.article-mini')) {
-    safeGtag('event', 'click', {event_category: 'article', event_label: 'article_' + el.textContent.trim()});
+    const num = el.textContent.trim();
+    const title = el.getAttribute('title') || ('article_' + num);
+    safeGtag('event', 'article_click', {event_category: 'article', event_label: title, article_number: num});
     return;
   }
   // 7) روابط "View Google Sheet" داخل لوحات التفاصيل (نفس اسم حدث sheet_click عشان يتجمعوا مع بعض)
