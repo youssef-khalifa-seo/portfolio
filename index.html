@@ -320,13 +320,13 @@ footer a{color:var(--gold);text-decoration:none}
 
 </style>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8L3SS2PNW"></script>
+<!-- ⚠️ استبدل G-XXXXXXXXXX برقم قياس GA4 الحقيقي بتاعك (Measurement ID) قبل الرفع -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-Y8L3SS2PNW');
+  gtag('config', 'G-XXXXXXXXXX');
 </script>
 </head>
 <body>
@@ -1660,7 +1660,7 @@ document.addEventListener('click', function(e){
     const wrap = el.closest('.pcard-sheet-wrap');
     const labelEl = wrap ? wrap.querySelector('.pcard-sheet-label') : null;
     const label = labelEl ? labelEl.textContent.trim() : el.href;
-    safeGtag('event', 'click', {event_category: 'sheet_link', event_label: label});
+    safeGtag('event', 'sheet_click', {event_category: 'sheet_link', event_label: label, source: 'card'});
     return;
   }
   // 6) روابط المقالات (Article mini)
@@ -1668,11 +1668,13 @@ document.addEventListener('click', function(e){
     safeGtag('event', 'click', {event_category: 'article', event_label: 'article_' + el.textContent.trim()});
     return;
   }
-  // 7) روابط "View Google Sheet" داخل لوحات التفاصيل
+  // 7) روابط "View Google Sheet" داخل لوحات التفاصيل (نفس اسم حدث sheet_click عشان يتجمعوا مع بعض)
   if (el.matches('.sheet-btn')) {
     const panel = el.closest('.dp');
     const panelId = panel ? panel.id.replace('dp-', '') : 'unknown';
-    safeGtag('event', 'click', {event_category: 'sheet_link', event_label: 'detail_view_' + panelId});
+    const wrap = el.closest('.eph');
+    const label = wrap ? (wrap.querySelector('p')?.textContent.trim() || panelId) : panelId;
+    safeGtag('event', 'sheet_click', {event_category: 'sheet_link', event_label: label, source: 'section'});
     return;
   }
 }, true); // true = capture phase، عشان يشتغل حتى مع stopPropagation() الموجودة على العناصر
