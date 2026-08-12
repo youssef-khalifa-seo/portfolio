@@ -320,13 +320,13 @@ footer a{color:var(--gold);text-decoration:none}
 
 </style>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8L3SS2PNW"></script>
+<!-- ⚠️ استبدل G-XXXXXXXXXX برقم قياس GA4 الحقيقي بتاعك (Measurement ID) قبل الرفع -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-Y8L3SS2PNW');
+  gtag('config', 'G-XXXXXXXXXX');
 </script>
 </head>
 <body>
@@ -1663,11 +1663,17 @@ document.addEventListener('click', function(e){
     safeGtag('event', 'sheet_click', {event_category: 'sheet_link', event_label: label, source: 'card'});
     return;
   }
-  // 6) روابط المقالات (Article mini) — حدث مستقل article_click
+  // 6) روابط المقالات (Article mini) داخل الكارد — حدث مستقل article_click
   if (el.matches('.article-mini')) {
     const num = el.textContent.trim();
     const title = el.getAttribute('title') || ('article_' + num);
-    safeGtag('event', 'article_click', {event_category: 'article', event_label: title, article_number: num});
+    safeGtag('event', 'article_click', {event_category: 'article', event_label: title, article_number: num, source: 'card'});
+    return;
+  }
+  // 6b) روابط المقالات الكاملة داخل لوحة التفاصيل (كلاس مختلف: article-link)
+  if (el.matches('.article-link')) {
+    const title = el.textContent.trim();
+    safeGtag('event', 'article_click', {event_category: 'article', event_label: title, source: 'section'});
     return;
   }
   // 7) روابط "View Google Sheet" داخل لوحات التفاصيل (نفس اسم حدث sheet_click عشان يتجمعوا مع بعض)
