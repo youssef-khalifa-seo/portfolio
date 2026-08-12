@@ -2,15 +2,6 @@
 
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8L3SS2PNW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Y8L3SS2PNW');
-</script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Youssef Khalifa — SEO Portfolio</title>
@@ -328,6 +319,15 @@ footer a{color:var(--gold);text-decoration:none}
 }
 
 </style>
+<!-- Google tag (gtag.js) -->
+<!-- ⚠️ استبدل G-XXXXXXXXXX برقم قياس GA4 الحقيقي بتاعك (Measurement ID) قبل الرفع -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
 </head>
 <body>
 <nav>
@@ -1616,8 +1616,71 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
+// ===== GA4 Event Tracking =====
+// دالة آمنة: ما بتكسرش الموقع لو gtag محجوبة (أدوات حجب الإعلانات) أو لسه ما اتحملتش
+function safeGtag(){
+  if (typeof gtag === 'function') {
+    try { gtag.apply(null, arguments); } catch(e) { /* silent fail */ }
+  }
+}
+
+// مستمع واحد على مستوى document في مرحلة الـ capture (قبل ما تنفّذ onclick بتاعة العنصر نفسه)
+// ده بيضمن رصد النقرة حتى لو العنصر عنده event.stopPropagation() (زي روابط pcard-sheet و article-mini)
+// ولأنه بيسمع click العادي، مش محتاج preventDefault ولا setTimeout: الروابط الداخلية anchors
+// (مفيش unload) والروابط الخارجية كلها target="_blank" (الصفحة الحالية فضلة مفتوحة برضه)
+document.addEventListener('click', function(e){
+  const el = e.target.closest('a, button');
+  if (!el) return;
+
+  // 1) روابط التنقل الداخلية (Nav)
+  if (el.matches('.nav-links a')) {
+    safeGtag('event', 'click', {event_category: 'nav', event_label: 'nav_' + el.textContent.trim().toLowerCase()});
+    return;
+  }
+  // 2) أزرار الهيرو
+  if (el.matches('.btn-g, .btn-o')) {
+    const label = el.classList.contains('btn-g') ? 'hero_view_projects' : 'hero_get_in_touch';
+    safeGtag('event', 'click', {event_category: 'hero', event_label: label});
+    return;
+  }
+  // 3) أيقونات التواصل الاجتماعي
+  if (el.matches('.sicon')) {
+    const label = (el.getAttribute('title') || el.href || '').toLowerCase();
+    safeGtag('event', 'click', {event_category: 'social', event_label: label});
+    return;
+  }
+  // 4) روابط التواصل في قسم Contact
+  if (el.matches('.clink')) {
+    const label = el.href.startsWith('mailto:') ? 'email' : el.href.includes('linkedin') ? 'linkedin' : el.href.includes('wa.me') ? 'whatsapp' : el.href;
+    safeGtag('event', 'click', {event_category: 'contact', event_label: label});
+    return;
+  }
+  // 5) روابط Google Sheets داخل بطاقات المشاريع
+  if (el.matches('.pcard-sheet')) {
+    const wrap = el.closest('.pcard-sheet-wrap');
+    const labelEl = wrap ? wrap.querySelector('.pcard-sheet-label') : null;
+    const label = labelEl ? labelEl.textContent.trim() : el.href;
+    safeGtag('event', 'click', {event_category: 'sheet_link', event_label: label});
+    return;
+  }
+  // 6) روابط المقالات (Article mini)
+  if (el.matches('.article-mini')) {
+    safeGtag('event', 'click', {event_category: 'article', event_label: 'article_' + el.textContent.trim()});
+    return;
+  }
+  // 7) روابط "View Google Sheet" داخل لوحات التفاصيل
+  if (el.matches('.sheet-btn')) {
+    const panel = el.closest('.dp');
+    const panelId = panel ? panel.id.replace('dp-', '') : 'unknown';
+    safeGtag('event', 'click', {event_category: 'sheet_link', event_label: 'detail_view_' + panelId});
+    return;
+  }
+}, true); // true = capture phase، عشان يشتغل حتى مع stopPropagation() الموجودة على العناصر
+
 // Project Detail - opens inline below clicked card, full width
 function openDP(id, card){
+  safeGtag('event', 'click', {event_category: 'details', event_label: id});
+
   const panel = document.getElementById('dp-'+id);
   const isOpen = panel.classList.contains('open');
 
@@ -1641,6 +1704,8 @@ function openDP(id, card){
 }
 
 function closeDP(id){
+  safeGtag('event', 'click', {event_category: 'details', event_label: 'close_' + id});
+
   const panel = document.getElementById('dp-'+id);
   panel.classList.remove('open');
   panel.style.display = 'none';
