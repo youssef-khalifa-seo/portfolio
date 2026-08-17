@@ -19,14 +19,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:68px;dis
 .nav-links a{color:var(--white2);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
 .nav-links a:hover{color:var(--gold)}
 
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-ML7F5FQQ');</script>
-<!-- End Google Tag Manager -->
-                             
 /* HERO */
 .hero{min-height:100vh;display:flex;align-items:center;padding:110px 6% 80px;position:relative;overflow:hidden}
 .orb{position:absolute;border-radius:50%;pointer-events:none}
@@ -349,13 +341,19 @@ html[dir="rtl"] .eph a,html[dir="rtl"] .article-mini-row{direction:ltr;display:i
   .sklist{grid-template-columns:1fr}
   .dpmeta{grid-template-columns:1fr}
 }
+
+</style>
+<!-- Google tag (gtag.js) -->
+<!-- ⚠️ استبدل G-XXXXXXXXXX برقم قياس GA4 الحقيقي بتاعك (Measurement ID) قبل الرفع -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
 </script>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ML7F5FQQ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 <nav>
 <a class="nav-logo" href="#"><span class="i18n" data-i="0">Youssef</span>&#160;<em><span class="i18n" data-i="1">Khalifa</span></em></a>
 <ul class="nav-links">
