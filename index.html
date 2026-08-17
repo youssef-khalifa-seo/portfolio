@@ -89,11 +89,9 @@ section{padding:110px 6%;position:relative;z-index:1}
 .pcard-details{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--white2);padding:8px 14px;border-radius:4px;font-weight:500;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;border:1px solid var(--border);transition:all 0.22s;cursor:pointer;flex-shrink:0}
 .pcard-details:hover{border-color:var(--sky);color:var(--sky)}
 .pcard-details svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
-.pcard-sheets{display:grid;grid-auto-flow:column;grid-template-rows:repeat(3,auto);gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
-.pcard-sheets::-webkit-scrollbar{height:6px}
-.pcard-sheets::-webkit-scrollbar-thumb{background:var(--gold-bdr);border-radius:3px}
+.pcard-sheets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
 .pcard-sheet-wrap{display:flex;flex-direction:column;gap:3px}
-.pcard-sheet-label{font-size:9px;color:var(--white3);text-transform:uppercase;letter-spacing:0.08em;padding-left:2px}
+.pcard-sheet-label{font-size:9px;line-height:1.35;min-height:24px;display:flex;align-items:flex-end;color:var(--white3);text-transform:uppercase;letter-spacing:0.08em;padding-inline-start:2px}
 
 /* DETAIL PANEL - opens inline after card row */
 .dp{display:none;background:var(--navy2);border:1px solid var(--border);border-top:3px solid var(--gold);margin-top:0;grid-column:1/-1;width:100%}
@@ -346,13 +344,13 @@ html[dir="rtl"] .eph a,html[dir="rtl"] .article-mini-row{direction:ltr;display:i
 
 </style>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8L3SS2PNW"></script>
+<!-- ⚠️ استبدل G-XXXXXXXXXX برقم قياس GA4 الحقيقي بتاعك (Measurement ID) قبل الرفع -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-Y8L3SS2PNW');
+  gtag('config', 'G-XXXXXXXXXX');
 </script>
 </head>
 <body>
